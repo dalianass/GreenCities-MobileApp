@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton';
 function WelcomeScreen({navigation}) {
     return (
         <View style={styles.background}>
-            <ImageBackground style={styles.backgroundImg} source={require("../assets/last.png")}>
+            <ImageBackground style={styles.backgroundImg} source={require("../assets/final.png")}>
                 <Image style={styles.logo} source={require("../assets/logo.png")}/>
                 <Text style={styles.text}>Čuvajmo okolinu.</Text>
                 <Text style={styles.textSmall}>Pomozi lociranje deponija prijavom.</Text>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     textSmall: {
         marginVertical:20,
         fontSize: 20,
-        color: '#fff',
+        color: '#eee',
         marginHorizontal: 40
     },
     buttonsContainer: {
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     logo: {
         width:120,
         height: 120,
-        marginVertical:30
+        marginVertical:30,
+        resizeMode: 'contain'
     },
 
     loginButton: {

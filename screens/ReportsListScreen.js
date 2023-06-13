@@ -33,7 +33,7 @@ function ReportsListScreen({navigation}) {
         address={item.address}
         description = {item.description}
         photo={require("../assets/background.png")}
-        onPress={() => navigation.navigate("ReportDetails")}
+        onPress={() => navigation.navigate("ReportDetails", {report: item})}
         /> 
        )
    }

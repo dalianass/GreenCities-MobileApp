@@ -1,31 +1,35 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-// function ReportDetailScreen({report}) {
-    function ReportDetailScreen() {
+function ReportDetailScreen({route}) {
 
-    // return (
-    //     <View style={styles.container}>
-    //         <Image style={styles.img} source={require("../assets/background.png")}/>
-    //         <View style={styles.detailsContainer}>
-    //             <Text style={styles.title}>{report.title}</Text>
-    //             <Text style={styles.opis}>{report.description}
-    //             </Text>
-    //             <Text style={styles.address}>{report.address}</Text>
-    //         </View>
-    //     </View>
-    // );
+    const { report } = route.params
+    
     return (
         <View style={styles.container}>
             <Image style={styles.img} source={require("../assets/background.png")}/>
             <View style={styles.detailsContainer}>
-                <Text style={styles.title}>dsfda</Text>
-                <Text style={styles.opis}>kjncsajkz
+                <Text style={styles.title}>{report.title}</Text>
+                <Text style={styles.opis}>{report.description}
                 </Text>
-                <Text style={styles.address}>kjnsj</Text>
+                <Text style={styles.address}>{report.address}</Text>
             </View>
         </View>
     );
+
+
+    // function ReportDetailScreen() {
+    // return (
+    //     <View style={styles.container}>
+    //         <Image style={styles.img} source={require("../assets/background.png")}/>
+    //         <View style={styles.detailsContainer}>
+    //             <Text style={styles.title}>dsfda</Text>
+    //             <Text style={styles.opis}>kjncsajkz
+    //             </Text>
+    //             <Text style={styles.address}>kjnsj</Text>
+    //         </View>
+    //     </View>
+    // );
 }
 
 const styles = StyleSheet.create({

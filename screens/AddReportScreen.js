@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import {View, StyleSheet, Text} from 'react-native'
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
-// import PlaceSearch from '../components/PlaceSearch';
+import PlaceSearch from '../components/PlaceSearch';
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
 
 function AddReportScreen(props) {
-    const [address, setAddress] = useState("Probna adresa");
+    const [address, setAddress] = useState("Probna adresa NOVO");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [latitude, setLatitude] = useState("20.56615");
@@ -18,7 +18,7 @@ function AddReportScreen(props) {
             title: title,
             address: address,
             description: desc,
-            photo: "default.jpg",
+            photo: "background.png",
             createdBy: {
                 id: 4
             },
@@ -39,7 +39,7 @@ function AddReportScreen(props) {
     return (
        <View style={styles.container}>
             <Text style={styles.text}>Kreirajte izvestaj o deponiji</Text>
-           {/* <PlaceSearch onSelectedAddressCallBack= {(data) => 
+           <PlaceSearch onSelectedAddressCallBack= {(data) => 
             {
                 setLatitude(data.coordinate.lat);
                 setLongitude(data.coordinate.lng);
@@ -47,7 +47,7 @@ function AddReportScreen(props) {
                 alert("Uspesno pokupljene koordinate sa ovog mesta.");
             }
             }
-           onChangeText={text => console.log("Radi")}/> */}
+           onChangeText={text => console.log("Radi")}/>
 
            <AppTextInput placeholder="Unesite naslov objave"
             onChangeText={text => setTitle(text)}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20
     },
     text: {
-        marginTop: 20,
+        // marginTop: 20,
         fontSize: 20
     }
 })

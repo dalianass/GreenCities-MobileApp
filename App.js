@@ -25,7 +25,7 @@ export default function App() {
 
     <NavigationContainer>
     <Stack.Navigator initialRouteName='Green'>
-    <Stack.Screen name='Green' component={Map} />
+    <Stack.Screen name='Green' component={WelcomeScreen} />
     <Stack.Screen name='Prijava' component={LoginScreen} />
     <Stack.Screen name='Registracija' component={RegisterScreen} />
     <Stack.Screen name='Pregled prijava' component={ReportsListScreen} />

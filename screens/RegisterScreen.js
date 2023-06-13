@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
         height: 120,
         alignSelf: 'center',
         marginTop:50,
-        marginBottom:30
+        marginBottom:30,
+        resizeMode: 'contain'
     },
     title: {
         fontSize:24,

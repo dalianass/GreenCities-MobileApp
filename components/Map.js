@@ -6,7 +6,7 @@ import MapMarker from "./MapMarker";
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
 
-export default function Map() {
+export default function Map({navigation}) {
     const [pin, setPin] = useState(
        { 
         latitude: 43.14060358261857,
@@ -31,7 +31,7 @@ export default function Map() {
       });
   };
 
-  const markers = items.map((item)=><MapMarker pin={{latitude: item.latitude, longitude: item.longitude}}/>);
+  const markers = items.map((item)=><MapMarker pin={{latitude: item.latitude, longitude: item.longitude}} report={item} rep={item}/>);
   return (
     <View style={styles.container}>
       <MapView style={styles.map}  
