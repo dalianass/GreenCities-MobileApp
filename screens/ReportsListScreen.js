@@ -27,7 +27,7 @@ function ReportsListScreen({navigation}) {
     }
 
     const renderItem = ({item, index}) => {
-        console.log(item);
+        // console.log(item);
        return (
         <Card title={item.title}
         address={item.address}
@@ -41,6 +41,7 @@ function ReportsListScreen({navigation}) {
         <View style={styles.container}>
             {}
             <FlatList 
+            showsVerticalScrollIndicator={false}
             data={items}
             style={styles.list}
             keyExtractor={(item, index) => item.id.toString()}

@@ -7,7 +7,7 @@ function PlaceSearch({onSelectedAddressCallBack}) {
     const [inputValue, setInputValue] = useState('');
     return (
         <View style={styles.pozadina}>
-            <Placesearch 
+            <Placesearch style={styles.pozadina}
             apikey="AIzaSyADRwyIdclthwhYK71wenGMfNLCJQi9b5s" 
             SelectedAddress={(data)=>onSelectedAddressCallBack(data)} 
             onClose={(data)=>alert(data)}
@@ -27,10 +27,13 @@ const styles = StyleSheet.create({
     pozadina: {
         backgroundColor: 'red',
         // marginTop: '10%',
-        flex: 1,
+        flex: 2,
         width: '100%',
         // borderBottomColor: "red",
         // borderBottomWidth: 5
+    },
+    place: {
+        zIndex: 9999
     }
 })
 export default PlaceSearch;

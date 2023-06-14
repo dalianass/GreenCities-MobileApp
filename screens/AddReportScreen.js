@@ -39,15 +39,7 @@ function AddReportScreen(props) {
     return (
        <View style={styles.container}>
             <Text style={styles.text}>Kreirajte izvestaj o deponiji</Text>
-           <PlaceSearch onSelectedAddressCallBack= {(data) => 
-            {
-                setLatitude(data.coordinate.lat);
-                setLongitude(data.coordinate.lng);
-                setAddress(data.description);
-                alert("Uspesno pokupljene koordinate sa ovog mesta.");
-            }
-            }
-           onChangeText={text => console.log("Radi")}/>
+
 
            <AppTextInput placeholder="Unesite naslov objave"
             onChangeText={text => setTitle(text)}
@@ -56,6 +48,15 @@ function AddReportScreen(props) {
             <AppTextInput placeholder="Unesite komentar"
             onChangeText={text => setDescription(text)}
             autoCorrect={false} />   
+
+            <PlaceSearch onSelectedAddressCallBack= {(data) => 
+            {
+                setLatitude(data.coordinate.lat);
+                setLongitude(data.coordinate.lng);
+                setAddress(data.description);
+                alert("Uspesno pokupljene koordinate sa ovog mesta.");
+            }}
+           onChangeText={text => console.log("Radi")}/>
             <AppButton title="Prijavi deponiju" onPress={() => callApi(title, address, description, latitude, longitude)}/>
        </View>      
     );

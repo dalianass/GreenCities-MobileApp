@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, View, Image, Text, ImageBackground} from 'react-native';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import axios from 'axios';
@@ -89,30 +89,31 @@ function LoginScreen({navigation}) {
 
     return (
             <View style={styles.container}>
-                <Image style={styles.logo} source={require("../assets/logo.png")}/>
-                <Text style={styles.title}> Ulogujte se:</Text>
+                <ImageBackground style={styles.backgroundImg} source={require("../assets/2.png")}>
+                    <Image style={styles.logo} source={require("../assets/logo.png")}/>
+                    <Text style={styles.title}> Ulogujte se:</Text>
 
-                <AppTextInput placeholder="Email" icon="email"
-                onChangeText={text => {setEmail(text); handleValidUser(text)}}
-                keyboardType="email-address" autoCorrect={false} 
-                />
-                {formData.isValidUser ? null :
-                <Text style={styles.errorMsg}>Email ne sme biti kraci od 4 cifre.</Text> 
-                }
- 
-                <AppTextInput placeholder="Password" icon="lock"
-                onChangeText={text => {setPassword(text); handleValidPassword(text)}}
-                secureTextEntry autoCorrect={false}
-                />
-                {formData.isValidPassword ? null :
-                <Text style={styles.errorMsg}>Password mora sadrzati najmanje 8 karaktera!</Text>
-                 }     
+                    <AppTextInput placeholder="Email" icon="email"
+                    onChangeText={text => {setEmail(text); handleValidUser(text)}}
+                    keyboardType="email-address" autoCorrect={false} 
+                    />
+                    {formData.isValidUser ? null :
+                    <Text style={styles.errorMsg}>Email ne sme biti kraci od 4 cifre.</Text> 
+                    }
+    
+                    <AppTextInput placeholder="Password" icon="lock"
+                    onChangeText={text => {setPassword(text); handleValidPassword(text)}}
+                    secureTextEntry autoCorrect={false}
+                    />
+                    {formData.isValidPassword ? null :
+                    <Text style={styles.errorMsg}>Password mora sadrzati najmanje 8 karaktera!</Text>
+                    }     
 
-                <AppButton title="Login" onPress={() =>  {
-                            callApi(email, password) ? navigation.navigate("Pregled prijava") : null
-                           }}
-                />
-
+                    <AppButton title="Login" onPress={() =>  {
+                                callApi(email, password) ? navigation.navigate("Pregled prijava") : null
+                            }}
+                    />
+                </ImageBackground>
             </View>
     );
 }
@@ -120,6 +121,13 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         width: '100%',
+        alignItems: 'center',
+    },
+    backgroundImg: {
+        flex: 1,
+        width:'100%',
+        height:'100%',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     logo: {

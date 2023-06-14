@@ -47,10 +47,9 @@ function RegisterScreen(props) {
     
     return (
             <View style={styles.container}>
-
+                <ScrollView style={styles.scroll}  showsVerticalScrollIndicator={false}>
                 <Image style={styles.logo} source={require("../assets/logo.png")}/>
                 <Text style={styles.title}> Registracija:</Text>
-                <ScrollView style={styles.scroll}>
                 <AppTextInput placeholder="Ime" icon="email"
                 onChangeText={text => setFirstName(text)}
                 autoCorrect={false} />  
@@ -85,14 +84,11 @@ const styles = StyleSheet.create({
         flex:1,
         width: '100%',
         alignItems: 'center',
-        borderWidth: 7,
-        borderColor: 'red',
+        // borderWidth: 7,
     },
     scroll: {
         // flex:1,
-        width: '80%',
-        borderWidth: 3,
-        borderColor: 'green',
+        width: '85%',
         // marginLeft: 55,
         // alignItems: 'center',
         // justifyContent: 'center'
@@ -110,7 +106,8 @@ const styles = StyleSheet.create({
         fontSize:24,
         fontWeight: 'bold',
         marginBottom: 30,
-        color: '#045346'
+        color: '#045346',
+        alignSelf: 'center'
     },
     errorMsg: {
         color: 'red',
