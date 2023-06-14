@@ -13,6 +13,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Map from './components/Map';
 import Chart from './components/Chart';
 import ChartScreen from './screens/ChartScreen';
+import AppImageUpload from './components/AppImageUpload';
 
 export default function App() {
 
@@ -27,12 +28,14 @@ export default function App() {
 
     <NavigationContainer>
     <Stack.Navigator initialRouteName='AddReport'>
-    <Stack.Screen name='Green' component={ChartScreen} />
+    <Stack.Screen name='Statistika' component={ChartScreen} />
     <Stack.Screen name='Prijava' component={LoginScreen} />
     <Stack.Screen name='Registracija' component={RegisterScreen} />
     <Stack.Screen name='Pregled prijava' component={ReportsListScreen} />
     <Stack.Screen name='AddReport' component={AddReportScreen} />
-    <Stack.Screen name='ReportDetails' component={ReportDetailScreen} />
+    <Stack.Screen name='Upload' component={AppImageUpload} />
+    <Stack.Screen name='Green' component={WelcomeScreen} />
+    <Stack.Screen name='Mapa' component={Map} />
     </Stack.Navigator>
   </NavigationContainer>
   // <ProbaMape/>
