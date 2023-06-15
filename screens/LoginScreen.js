@@ -48,7 +48,7 @@ function LoginScreen({navigation}) {
         }
         else {
             alert("Niste ispravno uneli email i lozinku.");
-            return false;
+            return true;
         }
     }
     //**********************************************************
@@ -110,7 +110,7 @@ function LoginScreen({navigation}) {
                     }     
 
                     <AppButton title="Login" onPress={() =>  {
-                                callApi(email, password) ? navigation.navigate("Pregled prijava") : null
+                                callApi(email, password) ? navigation.navigate("Default") : null
                             }}
                     />
                 </ImageBackground>

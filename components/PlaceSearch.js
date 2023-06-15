@@ -10,11 +10,15 @@ function PlaceSearch({onSelectedAddressCallBack}) {
             <Placesearch style={styles.pozadina}
             apikey="AIzaSyADRwyIdclthwhYK71wenGMfNLCJQi9b5s" 
             SelectedAddress={(data)=>onSelectedAddressCallBack(data)} 
-            onClose={(data)=>alert(data)}
+            onClose={(data)=> console.log("Zatvaramo") }
             country ="RS" 
             coordinate={true} 
-            removeImg = {true} 
-            MainContainer = {{backgroundColor: '#045346'}} 
+            removeImg = {true}
+            zIndex = {0} 
+            // MainContainer = {{backgroundColor: '#045346'}} 
+            ContainerBackgroundColor="#eee" // optional
+            InputContainer = {{backgroundColor: 'transparent'}} //optional
+            MainContainer = {{backgroundColor: 'transparent'}} 
             placeHolder = {'Unesite lokaciju deponije'} 
             />
         </View>
@@ -25,7 +29,7 @@ function PlaceSearch({onSelectedAddressCallBack}) {
 
 const styles = StyleSheet.create({
     pozadina: {
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         // marginTop: '10%',
         flex: 2,
         width: '100%',

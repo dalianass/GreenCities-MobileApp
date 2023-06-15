@@ -11,7 +11,7 @@ function ReportsListScreen({navigation}) {
     useEffect(() => {
         callApi();
     },
-    []);
+    [items]);
 
     const callApi = () =>{
         axios.get(myUrl + '/reports')
@@ -32,7 +32,7 @@ function ReportsListScreen({navigation}) {
         <Card title={item.title}
         address={item.address}
         description = {item.description}
-        photo={require("../assets/background.png")}
+        photo={item.photo !="" ? item.photo : "http://res.cloudinary.com/daq9ulbte/image/upload/v1686839885/db482cc7-d9f0-433c-b478-0d37f26264d6.png"}
         onPress={() => navigation.navigate("ReportDetails", {report: item})}
         /> 
        )
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height:'100%'
+        height:'100%',
+        borderWidth: 3
     },
     list: {
         // width: '20%',

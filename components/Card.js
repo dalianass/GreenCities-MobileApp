@@ -7,7 +7,7 @@ function Card({title, address, photo, description, onPress}) {
     return (
         <View>
             <TouchableOpacity style={styles.card} onPress={onPress}>
-                <Image style={styles.img} source={photo}/>
+                <Image style={styles.img} source={{uri:photo}}/>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.desc}>{description.substring(0, 20) + '...'}</Text>
                 <Text style={styles.address}>{address.substring(0, 35) + '...'}</Text>
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     card: {
         borderRadius:15,
         backgroundColor: 'white',
-        marginBottom: 20,
-        marginTop: 20,
+        // marginBottom: 20,
+        marginTop: 10,
         overflow:'hidden',
         shadowColor: "#000000",
         shadowOffset: {
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     img: {
         width: '100%',
         height: 200,
+        resizeMode: 'contain'
     }
 })
 

@@ -23,14 +23,11 @@ const AppImageUpload = ({sendUrlToParentComponent}) => {
 
     if (!result.canceled) {
       setSelectedImage(result.assets[0]);
-    }
-  };
 
-  const handleUploadImage = async () => {
-    if (selectedImage) {
+    //SLANJE NA ODGOVARAJUCI ENDPOINT
       const formData = new FormData();
       formData.append('image', {
-        uri: selectedImage.uri,
+        uri: result.assets[0].uri,
         type: 'image/jpeg',
         name: 'image.jpg',
       });
@@ -59,8 +56,9 @@ const AppImageUpload = ({sendUrlToParentComponent}) => {
           style={{ width: 150, height: 150, borderRadius:17, marginVertical: 4, alignSelf: 'center' }}
         />
       )}
-      <Button title="Odaberi sliku" onPress={handleChooseImage} />
-      <Button title="Upload Image" onPress={handleUploadImage} />
+      <View style={{width: '50%', alignSelf: 'center', marginTop: 7, marginBottom:17}}>
+        <Button title="Odaberi sliku" color={'#c2c0bc'} onPress={handleChooseImage} />
+      </View>
     </View>
   );
 };

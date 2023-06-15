@@ -14,6 +14,7 @@ function AddReportScreen(props) {
     const [latitude, setLatitude] = useState("20.56615");
     const [longitude, setLongitude] = useState("1.65454");
     const [image, setImage] = useState("");
+    
 
     const callApi = (title, address, desc, photo, lat, lng) => {
         const data = {
@@ -74,12 +75,17 @@ const styles = StyleSheet.create({
         flex:1,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         paddingVertical: 20
     },
     text: {
-        // marginTop: 20,
-        fontSize: 20
+        marginTop: 20,
+        // fontSize: 20,
+        fontSize:24,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        marginBottom: 30,
+        color: '#045346'
     },
     scroll: {
         width: '95%',
