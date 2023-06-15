@@ -24,7 +24,7 @@ export default function Map({navigation}) {
       .then(function (response) {
           let reports = response.data;
           setItems(reports);
-          alert("Izvestaji uspesno pokupljeni sa API-ja.");
+          // alert("Izvestaji uspesno pokupljeni sa API-ja.");
       })
       .catch(function (error) {
           alert(error);

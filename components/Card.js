@@ -11,7 +11,7 @@ function Card({title, address, photo, description, onPress}) {
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.desc}>{description.substring(0, 20) + '...'}</Text>
                 <Text style={styles.address}>{address.substring(0, 35) + '...'}</Text>
-                <AppButton height="5%" title={'Detaljnije...'} onPress={onPress}/>
+                <AppButton height="5%" title={"Detaljnije"} onPress={onPress}/>
             </TouchableOpacity>
         </View>
     );

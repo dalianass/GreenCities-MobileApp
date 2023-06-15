@@ -4,6 +4,7 @@ import axios from 'axios';
 import Card from '../components/Card';
 import { myUrl } from '../helpers/urlHelper';
 
+
 function ReportsListScreen({navigation}) {
     const [items, setItems] = useState([]);
     // const [loading, setLoading] = useState(true);
@@ -33,10 +34,12 @@ function ReportsListScreen({navigation}) {
         address={item.address}
         description = {item.description}
         photo={item.photo !="" ? item.photo : "http://res.cloudinary.com/daq9ulbte/image/upload/v1686839885/db482cc7-d9f0-433c-b478-0d37f26264d6.png"}
-        onPress={() => navigation.navigate("ReportDetails", {report: item})}
+        onPress={() => navigation.navigate("DetailsScreen", {report: item})}
         /> 
        )
    }
+
+
     return (
         <View style={styles.container}>
             {}
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height:'100%',
-        borderWidth: 3
+        borderWidth: 3,
     },
     list: {
         // width: '20%',

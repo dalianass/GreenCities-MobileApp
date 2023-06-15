@@ -5,6 +5,7 @@ import ReportsListScreen from '../screens/ReportsListScreen';
 import Map from '../components/Map';
 import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import ChartScreen from '../screens/ChartScreen';
+import ReportListNavigator from '../screens/ReportListNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ const CustomTabBarButton = ({children, onPress}) => (
 
 const Tabs = () => {
     return(
-        <Tab.Navigator
+        <Tab.Navigator screenOptions={{ headerShown: false }}
             tabBarOptions={{
                 showLabel: false,
                 style: {
@@ -41,7 +42,7 @@ const Tabs = () => {
                 }
             }}>
 
-            <Tab.Screen name='Home' component={ReportsListScreen}
+            <Tab.Screen name='Home' component={ReportListNavigator}
                 options={{
                     tabBarIcon: ({focused}) => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}> 

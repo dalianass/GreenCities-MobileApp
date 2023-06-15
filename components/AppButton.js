@@ -2,6 +2,7 @@
 #045346
 #8DA56C
 #D2E0DB
+#3f8861 boja navigacije
 #E2C18B*/
 
 import React from 'react';
