@@ -14,8 +14,7 @@ import Map from './components/Map';
 import Chart from './components/Chart';
 import ChartScreen from './screens/ChartScreen';
 import AppImageUpload from './components/AppImageUpload';
-import Tabs from './navigation/tabs';
-import DefaultScreen from './screens/DefaultScreen';
+import DefaultScreen from './navigation/DefaultScreen';
 
 export default function App() {
 

@@ -33,14 +33,16 @@ function ReportDetailScreen({route}) {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.img} source={require("../assets/background.png")}/>
+            <Image style={styles.img} source={{uri: report.photo !="" ? report.photo : "http://res.cloudinary.com/daq9ulbte/image/upload/v1686839885/db482cc7-d9f0-433c-b478-0d37f26264d6.png"}}/>
+            
+
             <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{report.title}</Text>
                 <Text style={styles.opis}>{report.description}
                 </Text>
                 <Text style={styles.address}>{report.address}</Text>
                 <AppButton disabled={disabled}
-                title={"Kliknite ukoliko ste uklonili deponiju"} onPress={() =>
+                title={disabled ? "Deponija je uklonjena": "Kliknite ukoliko ste uklonili deponiju"} onPress={() =>
                     {
                         updateReport(report.description, report.title, report.address, true)}
                     }/>  
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     img: {
         width: '100%',
         height: '50%',
+        resizeMode: 'contain'
     },
     detailsContainer: {
         padding: 20,

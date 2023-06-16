@@ -5,7 +5,7 @@ import ReportsListScreen from '../screens/ReportsListScreen';
 import Map from '../components/Map';
 import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import ChartScreen from '../screens/ChartScreen';
-import ReportListNavigator from '../screens/ReportListNavigator';
+import ReportListNavigator from './ReportListNavigator';
 
 const Tab = createBottomTabNavigator();
 

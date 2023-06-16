@@ -1,5 +1,5 @@
-import ReportDetailScreen from './ReportDetailScreen'
-import ReportsListScreen from './ReportsListScreen'
+import ReportDetailScreen from '../screens/ReportDetailScreen'
+import ReportsListScreen from '../screens/ReportsListScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
