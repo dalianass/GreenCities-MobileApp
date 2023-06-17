@@ -6,6 +6,7 @@ import Map from '../components/Map';
 import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import ChartScreen from '../screens/ChartScreen';
 import ReportListNavigator from './ReportListNavigator';
+import LogoutScreen from '../screens/LogoutScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -96,7 +97,7 @@ const Tabs = () => {
                     )
                 }}
             />
-            <Tab.Screen name='Lista3' component={ReportsListScreen}
+            <Tab.Screen name='Lista3' component={LogoutScreen}
                 options={{
                     tabBarIcon: ({focused}) => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}> 
@@ -104,7 +105,7 @@ const Tabs = () => {
                                 resizeMode='contain'
                                 style={{width: 25, height: 25, tintColor: focused ? '#045346' : '#c2c0bc'}}
                             />    
-                            <Text style={{color: focused ? '#045346' : '#c2c0bc', fontSize: 12, marginBottom: 15}}>Home</Text>
+                            <Text style={{color: focused ? '#045346' : '#c2c0bc', fontSize: 12, marginBottom: 15}}>Logout</Text>
                         </View>
                     )
                 }}

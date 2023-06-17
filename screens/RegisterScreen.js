@@ -28,7 +28,8 @@ function RegisterScreen(props) {
         .catch(function (error) {
             const errorResponse = error.response;
             
-            alert(errorResponse.data.errors[0].message);
+            // alert(errorResponse.data.errors[0].message);
+            alert("Vec postoji user sa tim mejlom.")
         });
     }
 

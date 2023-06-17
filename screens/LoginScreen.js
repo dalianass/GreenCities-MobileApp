@@ -1,56 +1,51 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, Image, Text, ImageBackground} from 'react-native';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
+import { AuthContext } from '../context/AuthContext';
 
 function LoginScreen({navigation}) {
-    // function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [formData, setFormData] = useState({
         isValidUser: true,
         isValidPassword: true
     });
 
-    // useEffect(() => {
-    //     callApi();
-    // },
-    // []);
+    const {login} = useContext(AuthContext);
 
-    //**********************************************************
 
-    const callApi = (email, pass) =>{
-        if(email.length && pass.length > 6) {
-            const data = {
-                email: email,
-                userPassword: pass
-            };
+    // const callApi = (email, pass) =>{
+    //     if(email.length && pass.length > 6) {
+    //         const data = {
+    //             email: email,
+    //             userPassword: pass
+    //         };
 
-            axios.post(myUrl + '/authenticate', data)
-                .then(function (response) {
-                    if (response.status == 200) {
-                        alert("Uspesno ste se ulogovali!");
-                        return true;
-                    }
-                })
-                .catch(function (error) {
-                    const errorResponse = error.response;
+    //         axios.post(myUrl + '/authenticate', data)
+    //             .then(function (response) {
+    //                 if (response.status == 200) {
+    //                     alert("Uspesno ste se ulogovali!");
+    //                     return true;
+    //                 }
+    //             })
+    //             .catch(function (error) {
+    //                 const errorResponse = error.response;
 
-                    // alert(errorResponse.data.errors[0].message);
-                    // alert(JSON.stringify(errorResponse));
-                    alert("Greska pri pokusaju logovanja.");
-                    return false;
-                });
+    //                 // alert(errorResponse.data.errors[0].message);
+    //                 // alert(JSON.stringify(errorResponse));
+    //                 alert("Greska pri pokusaju logovanja.");
+    //                 return false;
+    //             });
 
-        }
-        else {
-            alert("Niste ispravno uneli email i lozinku.");
-            return true;
-        }
-    }
+    //     }
+    //     else {
+    //         alert("Niste ispravno uneli email i lozinku.");
+    //         return true;
+    //     }
+    // }
     //**********************************************************
 
 
@@ -80,7 +75,7 @@ function LoginScreen({navigation}) {
     }
 
     const handleValidPassword = (val) => {
-        if(val.trim().length >=8) {
+        if(val.trim().length >=6) {
             setFormData({...formData, isValidPassword: true});
         } else {
             setFormData({...formData, isValidPassword: false})
@@ -106,13 +101,16 @@ function LoginScreen({navigation}) {
                     secureTextEntry autoCorrect={false}
                     />
                     {formData.isValidPassword ? null :
-                    <Text style={styles.errorMsg}>Password mora sadrzati najmanje 8 karaktera!</Text>
+                    <Text style={styles.errorMsg}>Password mora sadrzati najmanje 6 karaktera!</Text>
                     }     
 
                     <AppButton title="Login" onPress={() =>  {
-                                callApi(email, password) ? navigation.navigate("Default") : null
+                                // login(email, password);
+                                login(email, password) ? navigation.navigate("Default") : null
                             }}
                     />
+
+                    {/* <Text>{test}</Text> */}
                 </ImageBackground>
             </View>
     );
