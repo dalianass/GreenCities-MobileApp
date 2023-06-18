@@ -1,30 +1,22 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, ScrollView } from 'react-native';
 import axios from 'axios';
-import Card from '../components/Card';
-import { myUrl } from '../helpers/urlHelper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from '../context/AuthContext';
+import UserCard from '../components/UserCard';
+import { myUrl } from '../helpers/urlHelper';
 
 
-function ReportsListScreen({navigation}) {
+function UsersListScreen({navigation}) {
     const [items, setItems] = useState([]);
-    const {userToken} = useContext(AuthContext);
+    // const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         callApi();
     },
     [items]);
 
-    const axiosInstance = axios.create({
-        baseURL: myUrl,
-        headers: {
-          Authorization: 'Bearer ' + userToken
-        },
-      });
-
     const callApi = () =>{
-        axiosInstance.get('/reports')
+        axios.get(myUrl + '/users')
         .then(function (response) {
             let reports = response.data;
             setItems(reports);
@@ -39,11 +31,11 @@ function ReportsListScreen({navigation}) {
     const renderItem = ({item, index}) => {
         // console.log(item);
        return (
-        <Card title={item.title}
-        address={item.address}
-        description = {item.description}
-        photo={item.photo !="" ? item.photo : "http://res.cloudinary.com/daq9ulbte/image/upload/v1686839885/db482cc7-d9f0-433c-b478-0d37f26264d6.png"}
-        onPress={() => navigation.navigate("DetailsScreen", {report: item})}
+        <UserCard firstname={item.firstName}
+        lastname={item.lastName}
+        email = {item.email}
+        role={item.role[0].roleName}
+        photo={"http://res.cloudinary.com/daq9ulbte/image/upload/v1687096650/fd0c8b35-2083-485c-85ea-06a25737e678.png"}
         /> 
        )
    }
@@ -74,10 +66,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height:'100%',
+        borderWidth: 3,
     },
     list: {
         // width: '20%',
         // height: '40%'
     }
 })
-export default ReportsListScreen;
+export default UsersListScreen;

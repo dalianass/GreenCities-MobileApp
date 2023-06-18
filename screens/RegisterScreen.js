@@ -41,7 +41,7 @@ function RegisterScreen(props) {
                 return false
             }
         } else 
-        return null
+        return false;
 
     }
 
@@ -51,11 +51,11 @@ function RegisterScreen(props) {
                 <ScrollView style={styles.scroll}  showsVerticalScrollIndicator={false}>
                 <Image style={styles.logo} source={require("../assets/logo.png")}/>
                 <Text style={styles.title}> Registracija:</Text>
-                <AppTextInput placeholder="Ime" icon="email"
+                <AppTextInput placeholder="Ime" icon="account-box"
                 onChangeText={text => setFirstName(text)}
                 autoCorrect={false} />  
 
-                <AppTextInput placeholder="Prezime" icon="email"
+                <AppTextInput placeholder="Prezime" icon="account-box-multiple"
                 onChangeText={text => setLastName(text)}
                 autoCorrect={false} />   
 
@@ -68,14 +68,13 @@ function RegisterScreen(props) {
                 secureTextEntry autoCorrect={false}/> 
 
                 <AppTextInput placeholder="Ponovite lozinku" icon="lock"
-                onChangeText={text => setPasswordRepeated(text)}
-                secureTextEntry autoCorrect={false}/>   
-
-                {(passwordsMatch(password, passwordRepeated)) ? null :
-                <Text style={styles.errorMsg}>Lozinke se ne poklapaju. Pokusajte ponovo.</Text> 
+                onChangeText={text => {
+                    setPasswordRepeated(text)
                 }
-
-                <AppButton title="Registruj se" onPress={() => callApi(firstName, lastName, email, password)}/>
+            }
+                secureTextEntry autoCorrect={false}/>   
+{/* passwordsMatch(password, passwordRepeated) ? <Text>nista</Text> : <Text style={styles.errorMsg}>Lozinke se ne poklapaju. Pokusajte ponovo.</Text>  */}
+                <AppButton title="Registruj se" onPress={() => callApi(firstName, lastName, email.toLowerCase(), password.toLowerCase())}/>
                 </ScrollView>
             </View>
     );

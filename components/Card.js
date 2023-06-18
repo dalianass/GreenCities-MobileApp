@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-import AppButton from '../components/AppButton'
+import AppButton from './AppButton';
 
 function Card({title, address, photo, description, onPress}) {
 
@@ -11,7 +11,9 @@ function Card({title, address, photo, description, onPress}) {
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.desc}>{description.substring(0, 20) + '...'}</Text>
                 <Text style={styles.address}>{address.substring(0, 35) + '...'}</Text>
-                <AppButton height="5%" title={"Detaljnije"} onPress={onPress}/>
+                <AppButton  title={"Detaljnije..."} onPress={onPress}/>
+                
+
             </TouchableOpacity>
         </View>
     );
@@ -33,7 +35,8 @@ const styles = StyleSheet.create({
         shadowRadius: 3.05,
         elevation: 4,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        // paddingVertical:20
     },
     detailsContainer: {
         padding: 20,

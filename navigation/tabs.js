@@ -3,7 +3,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import AddReportScreen from '../screens/AddReportScreen';
 import ReportsListScreen from '../screens/ReportsListScreen';
 import Map from '../components/Map';
-import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import ChartScreen from '../screens/ChartScreen';
 import ReportListNavigator from './ReportListNavigator';
 import LogoutScreen from '../screens/LogoutScreen';
@@ -26,23 +26,44 @@ const CustomTabBarButton = ({children, onPress}) => (
 
 
 
-const Tabs = () => {
+const Tabs = ({navigation}) => {
     return(
-        <Tab.Navigator screenOptions={{ headerShown: false }}
-            tabBarOptions={{
-                showLabel: false,
-                style: {
-                    position: 'relative',
-                    bottom: '75',
-                    left: '20',
-                    right: '20',
-                    elevation: 0,
-                    backgroundColor: '#ffffff',
-                    borderRadius: 15,
-                    height: 90,
-                    ...styles.shadow
-                }
+        <Tab.Navigator 
+        
+        screenOptions={{
+            tabBarShowLabel: false,
+            style: {
+                position: 'relative',
+                bottom: '75',
+                left: '20',
+                right: '20',
+                elevation: 0,
+                backgroundColor: '#ffffff',
+                borderRadius: 15,
+                height: 90,
+                ...styles.shadow
+            },
+            headerStyle: {
+              backgroundColor: '#3f8861',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitle: (props) => ( // App Logo
+            <TouchableOpacity 
+            onPress={()=>  {
+                navigation.openDrawer()
             }}>
+                <ImageBackground
+                style={{ width: 50, height: 50 }}
+                source={{uri:"http://res.cloudinary.com/daq9ulbte/image/upload/v1687097401/26093d44-e41b-484d-acae-18fdcae74766.png"}}
+                resizeMode='contain'/>
+            </TouchableOpacity>
+            
+          ),
+          headerTitleStyle: { flex: 1 },
+        }}>
 
             <Tab.Screen name='Home' component={ReportListNavigator}
                 options={{

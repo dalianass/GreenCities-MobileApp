@@ -6,6 +6,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import DefaultScreen from './DefaultScreen';
+// import SideNavigator from './SideNavigator';
 
 
 export default function WelcomeStackNavigator() {

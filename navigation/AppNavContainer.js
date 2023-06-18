@@ -22,7 +22,7 @@ export default function AppNavContainer() {
   return (
     <NavigationContainer>
         {userToken !== null ? <SideNavigator/> : <WelcomeStackNavigator/>  }
-        {/* <SideNavigator/> */}
+        {/* <WelcomeStackNavigator/> */}
     </NavigationContainer>
     );
 }

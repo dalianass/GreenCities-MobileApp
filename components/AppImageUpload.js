@@ -40,7 +40,7 @@ const AppImageUpload = ({sendUrlToParentComponent}) => {
         });
         sendUrlToParentComponent(response.data);
         console.log(response.data); // Ovde možete obraditi odgovor sa servera
-        alert("Uspesno ste uneli fotografiju.")
+        // alert("Uspesno ste uneli fotografiju.")
       } catch (error) {
         alert("Problem sa unosenjem fotografije.")
         console.error(error);

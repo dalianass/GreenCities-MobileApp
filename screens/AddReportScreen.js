@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {View, StyleSheet, Text, ScrollView} from 'react-native'
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
@@ -6,6 +6,7 @@ import PlaceSearch from '../components/PlaceSearch';
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
 import AppImageUpload from '../components/AppImageUpload';
+import { AuthContext } from '../context/AuthContext';
 
 function AddReportScreen(props) {
     const [address, setAddress] = useState("Probna adresa NOVO");
@@ -14,7 +15,16 @@ function AddReportScreen(props) {
     const [latitude, setLatitude] = useState("20.56615");
     const [longitude, setLongitude] = useState("1.65454");
     const [image, setImage] = useState("");
-    
+
+    const {userInfo} = useContext(AuthContext);
+    const {userToken} = useContext(AuthContext);
+
+    const axiosInstance = axios.create({
+        baseURL: myUrl,
+        headers: {
+          Authorization: 'Bearer ' + userToken
+        },
+      });
 
     const callApi = (title, address, desc, photo, lat, lng) => {
         const data = {
@@ -23,12 +33,12 @@ function AddReportScreen(props) {
             description: desc,
             photo: photo,
             createdBy: {
-                id: 4
+                id: userInfo.user.id
             },
             latitude: lat,
             longitude: lng
         };
-        axios.post(myUrl + '/reports', data)
+        axiosInstance.post('/reports', data)
         .then(function (response) {
             if(response.status == 201) {
                 alert("Uspesno ste kreirali izvestaj.");

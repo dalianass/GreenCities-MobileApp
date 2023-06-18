@@ -17,23 +17,23 @@ export const AuthProvider = ({children}) => {
     //     AsyncStorage.setItem('userToken', 'ovo je neki random user token');
     //     setIsLoading(false);
     // }
+    
 
     const login = (email, pass) =>{
         setIsLoading(true)
-        if(email.length && pass.length > 6) {
+        if(email.length && pass.length >= 6) {
             const data = {
-                email: email,
-                userPassword: pass
+                email: email.toLowerCase(),
+                userPassword: pass.toLowerCase()
             };
 
             axios.post(myUrl + '/authenticate', data)
                 .then(function (response) {
                     if (response.status == 200) {
-                        alert("Uspesno ste se ulogovali!");
+                        // alert("Uspesno ste se ulogovali!");
                         setUserInfo(response.data);
                         setUserToken(response.data.jwtToken);
 
-                        // AsyncStorage.setItem('userToken', "dbfjsbdfdh");
                         AsyncStorage.setItem('userToken', userToken);
                         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
 
@@ -86,9 +86,9 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    // useEffect(() => {
-    //     isLoggedIn();
-    // }, []); 
+    useEffect(() => {
+        isLoggedIn();
+    }, []); 
 
     return (
         <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo}}>
