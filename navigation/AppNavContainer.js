@@ -5,10 +5,10 @@ import { ActivityIndicator, ImageBackground, View } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import WelcomeStackNavigator from './WelcomeStackNavigator';
 import Tabs from './tabs';
+import SideNavigator from './SideNavigator';
 
 
 export default function AppNavContainer() {
-  // const Stack = createNativeStackNavigator();
   const {isLoading, userToken} = useContext(AuthContext);
 
   if(isLoading) {
@@ -21,8 +21,8 @@ export default function AppNavContainer() {
 
   return (
     <NavigationContainer>
-        {userToken !== null ? <Tabs/> : <WelcomeStackNavigator/>  }
-        {/* <WelcomeStackNavigator/> */}
-  </NavigationContainer>
+        {userToken !== null ? <SideNavigator/> : <WelcomeStackNavigator/>  }
+        {/* <SideNavigator/> */}
+    </NavigationContainer>
     );
 }

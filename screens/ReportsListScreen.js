@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, ScrollView }
 import axios from 'axios';
 import Card from '../components/Card';
 import { myUrl } from '../helpers/urlHelper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 function ReportsListScreen({navigation}) {
@@ -41,7 +42,8 @@ function ReportsListScreen({navigation}) {
 
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+        {/* <View> */}
             {}
             <FlatList 
             showsVerticalScrollIndicator={false}
@@ -50,8 +52,11 @@ function ReportsListScreen({navigation}) {
             keyExtractor={(item, index) => item.id.toString()}
             renderItem={renderItem}
             />
-        </View>
+        {/* </View> */}
+        </SafeAreaView>
     );
+
+
 }
 
 const styles = StyleSheet.create({

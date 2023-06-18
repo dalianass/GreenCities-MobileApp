@@ -33,9 +33,9 @@ export const AuthProvider = ({children}) => {
                         setUserInfo(response.data);
                         setUserToken(response.data.jwtToken);
 
-                        AsyncStorage.setItem('userToken', "dbfjsbdfdh");
-                        // AsyncStorage.setItem('userToken', userToken);
-                        // AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+                        // AsyncStorage.setItem('userToken', "dbfjsbdfdh");
+                        AsyncStorage.setItem('userToken', userToken);
+                        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
 
                         console.log(response.data.jwtToken);
                         return true;
@@ -43,7 +43,7 @@ export const AuthProvider = ({children}) => {
                 })
                 .catch(function (error) {
                     const errorResponse = error.response;
-                    alert("Greska pri pokusaju logovanja.");
+                    alert("Greska pri pokusaju logovanja. Proverite podatke ponovo.");
                     return false;
                 });
                 setIsLoading(false);
@@ -53,7 +53,7 @@ export const AuthProvider = ({children}) => {
             alert("Niste ispravno uneli email i lozinku.");
             setIsLoading(false);
 
-            return true;
+            return false;
         }
     }
 

@@ -7,6 +7,7 @@ import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import ChartScreen from '../screens/ChartScreen';
 import ReportListNavigator from './ReportListNavigator';
 import LogoutScreen from '../screens/LogoutScreen';
+import SideNavigator from './SideNavigator';
 
 const Tab = createBottomTabNavigator();
 
