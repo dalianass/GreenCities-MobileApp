@@ -8,6 +8,11 @@ import ChartScreen from '../screens/ChartScreen';
 import ReportListNavigator from './ReportListNavigator';
 import LogoutScreen from '../screens/LogoutScreen';
 import SideNavigator from './SideNavigator';
+import React,{ useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import jwtDecode from 'jwt-decode';
+import MyReportsScreen from '../screens/MyReportsScreen';
+import UsersListScreen from '../screens/UsersListScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +32,11 @@ const CustomTabBarButton = ({children, onPress}) => (
 
 
 const Tabs = ({navigation}) => {
+    const {userToken} = useContext(AuthContext);
+    const {userInfo} = useContext(AuthContext);
+    const decodedToken = jwtDecode(userToken);
+    const roleTrenutnogUsera = decodedToken.role[0].authority;
+
     return(
         <Tab.Navigator 
         
@@ -55,10 +65,16 @@ const Tabs = ({navigation}) => {
             onPress={()=>  {
                 navigation.openDrawer()
             }}>
-                <ImageBackground
-                style={{ width: 50, height: 50 }}
-                source={{uri:"http://res.cloudinary.com/daq9ulbte/image/upload/v1687097401/26093d44-e41b-484d-acae-18fdcae74766.png"}}
-                resizeMode='contain'/>
+                <View style={{flexDirection: 'row', gap:7, alignItems:'center'}}>
+                    <ImageBackground
+                    style={{ width: 30, height: 30}}
+                    source={require("../assets/ikonice/hamburger.png")}
+                    resizeMode='contain'/>
+                    {/* <Text style={{color: "#fff"}}>{userInfo.user.firstName} {userInfo.user.lastName}</Text> */}
+                    <Text style={{color: "#fff"}}>Green</Text>
+
+                </View>
+
             </TouchableOpacity>
             
           ),
@@ -92,7 +108,8 @@ const Tabs = ({navigation}) => {
                     )
                 }}
             />
-            
+             { roleTrenutnogUsera ==='korisnik' 
+            ?
             <Tab.Screen name='Add' component={AddReportScreen}
                 options={{
                     tabBarIcon: ({focused}) => (
@@ -106,7 +123,9 @@ const Tabs = ({navigation}) => {
                     )
                 }}
             />
-            <Tab.Screen name='Lista2' component={ChartScreen}
+            : null}
+
+            <Tab.Screen name='Statistika' component={ChartScreen}
                 options={{
                     tabBarIcon: ({focused}) => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}> 
@@ -119,21 +138,39 @@ const Tabs = ({navigation}) => {
                     )
                 }}
             />
-            <Tab.Screen name='Lista3' component={LogoutScreen}
+            
+            {roleTrenutnogUsera ==='korisnik' 
+            ? 
+            <Tab.Screen name='Moji izvestaji' component={MyReportsScreen}
                 options={{
                     tabBarIcon: ({focused}) => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}> 
-                            <Image source={require('../assets/ikonice/home.png')}
+                            <Image source={require('../assets/ikonice/list.png')}
                                 resizeMode='contain'
                                 style={{width: 25, height: 25, tintColor: focused ? '#045346' : '#c2c0bc'}}
                             />    
-                            <Text style={{color: focused ? '#045346' : '#c2c0bc', fontSize: 12, marginBottom: 15}}>Logout</Text>
+                            <Text style={{color: focused ? '#045346' : '#c2c0bc', fontSize: 12, marginBottom: 15}}>Moji izvestaji</Text>
                         </View>
                     )
                 }}
             />
+            : 
+            <Tab.Screen name='Korisnici' component={UsersListScreen}
+            options={{
+                tabBarIcon: ({focused}) => (
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}> 
+                        <Image source={require('../assets/ikonice/group.png')}
+                            resizeMode='contain'
+                            style={{width: 25, height: 25, tintColor: focused ? '#045346' : '#c2c0bc'}}
+                        />    
+                        <Text style={{color: focused ? '#045346' : '#c2c0bc', fontSize: 12, marginBottom: 15}}>Korisnici</Text>
+                    </View>
+                )
+            }}
+            />
+        }
         </Tab.Navigator>
-    )
+    ) 
 }
 
 const styles = StyleSheet.create({

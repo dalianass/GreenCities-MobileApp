@@ -9,11 +9,9 @@ function MapMarker({pin, navigation, rep}) {
         <Marker coordinate={pin}
             pinColor="#045346">
             <Callout>
-                <TouchableOpacity  onPress={() => navigation.navigate("ReportDetails", {report: rep})}>
-                    <Text>Ovde se nalazi deponija.</Text>
-                </TouchableOpacity>
-
-            {/* <ReportDetailScreen route={route}/> */}
+                <Text style={styles.title}>{rep.title}</Text>
+                <Text style={styles.address}>Adresa:</Text>
+                <Text style={styles.address}>{rep.address}</Text>
             </Callout>
         </Marker>
     );
@@ -24,6 +22,12 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
         alignItems:'center'
+    },
+    ikonica: {
+        width: 20,
+        height:20,
+        marginHorizontal: 7,
+        marginVertical: 1
     },
     img: {
         width: '100%',

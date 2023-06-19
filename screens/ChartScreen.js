@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { StyleSheet, View, Text, Dimensions, ImageBackground } from 'react-native';
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
 import Chart from "../components/Chart";
+import { AuthContext } from '../context/AuthContext';
 
 export default function ChartScreen() {
     const [ukupnoIzvestaja, setUkupnoIzvestaja] = useState(0);
@@ -14,8 +15,16 @@ export default function ChartScreen() {
     },
     [ukupnoIzvestaja, ukupnoResenihIzvestaja]);
 
+    const {userToken} = useContext(AuthContext);
+
+    const axiosInstance = axios.create({
+        baseURL: myUrl,
+        headers: {
+          Authorization: 'Bearer ' + userToken
+        },
+      });
     const nadjiUkupanBrojIzvestaja = () =>{
-        axios.get(myUrl + '/reports')
+        axiosInstance.get('/reports')
         .then(function (response) {
             let reports = response.data;
             setUkupnoIzvestaja(reports.length);
@@ -28,7 +37,7 @@ export default function ChartScreen() {
     }
 
     const nadjiBrojZavrsenihIzvestaja = () =>{
-        axios.get(myUrl + '/reports/broj-resenih')
+        axiosInstance.get('/reports/broj-resenih')
         .then(function (response) {
             setUkupnoResenihIzvestaja(response.data);
             console.log("zavrsneih" + ukupnoResenihIzvestaja)

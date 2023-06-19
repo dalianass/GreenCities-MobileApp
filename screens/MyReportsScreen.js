@@ -7,9 +7,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from '../context/AuthContext';
 
 
-function ReportsListScreen({navigation}) {
+function MyReportsScreen({navigation}) {
     const [items, setItems] = useState([]);
     const {userToken} = useContext(AuthContext);
+    const {userInfo} = useContext(AuthContext);
 
     useEffect(() => {
         callApi();
@@ -24,7 +25,7 @@ function ReportsListScreen({navigation}) {
       });
 
     const callApi = () =>{
-        axiosInstance.get('/reports')
+        axiosInstance.get('/reports/reports-of-user/' + userInfo.user.id)
         .then(function (response) {
             let reports = response.data;
             setItems(reports);
@@ -42,7 +43,7 @@ function ReportsListScreen({navigation}) {
         <Card title={item.title}
         address={item.address}
         description = {item.description}
-        isFinished={item.isFinished}
+        isFinished = {item.isFinished}
         photo={item.photo !="" ? item.photo : "http://res.cloudinary.com/daq9ulbte/image/upload/v1686839885/db482cc7-d9f0-433c-b478-0d37f26264d6.png"}
         onPress={() => navigation.navigate("DetailsScreen", {report: item})}
         /> 
@@ -81,4 +82,4 @@ const styles = StyleSheet.create({
         // height: '40%'
     }
 })
-export default ReportsListScreen;
+export default MyReportsScreen;

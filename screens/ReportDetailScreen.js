@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import AppButton from '../components/AppButton';
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
+import { AuthContext } from '../context/AuthContext';
 
 function ReportDetailScreen({route}) {
 
-    const { report } = route.params
+    const { report } = route.params;
     const [disabled, setDisabled] = useState(report.isFinished);
 
+    const {userToken} = useContext(AuthContext);
+    const {userInfo} = useContext(AuthContext);
+
+    const axiosInstance = axios.create({
+        baseURL: myUrl,
+        headers: {
+          Authorization: 'Bearer ' + userToken
+        },
+      });
 
     const updateReport = (desc, title, addr, isFinished) => {
         const data = {
@@ -18,7 +28,7 @@ function ReportDetailScreen({route}) {
             isFinished: isFinished
         };
 
-        axios.put(myUrl + '/reports/' + report.id, data)
+        axiosInstance.put('/reports/' + report.id, data)
         .then(function (response) {
             if(response.status == 200) {
                 alert("Uspesno azurirana prijava!");
@@ -38,15 +48,44 @@ function ReportDetailScreen({route}) {
 
             <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{report.title}</Text>
-                <Text style={styles.opis}>{report.description}
-                </Text>
-                <Text style={styles.address}>{report.address}</Text>
-                <AppButton disabled={disabled}
-                title={disabled ? "Deponija je uklonjena": "Kliknite ukoliko ste uklonili deponiju"} onPress={() =>
-                    {
-                        updateReport(report.description, report.title, report.address, true)}
-                    }/>  
+                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    <Text style={styles.komentar}>Komentar: </Text>
+                    <Text style={styles.opis}>{report.description}</Text>
+                </View>
+                <Text style={styles.komentar}>Adresa na kojoj se nalazi deponija:</Text>
+
+                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    <Image source={require("../assets/ikonice/pin.png")}  style={styles.ikonica}/>
+                    <Text style={styles.address}>{report.address}</Text>
+                </View>
+
+                {report.isFinished 
+                ? 
+                <View style={styles.wrap}>
+                    <Image source={require("../assets/ikonice/verified.png")} style={styles.ikonica}/>
+                    <Text style={styles.approved}>Ova deponija je uklonjena!</Text>
+                </View> 
+                :
+                <View>
+                    <View style={styles.wrap}>
+                        <Image source={require("../assets/ikonice/cancel.png")} style={styles.ikonica}/>
+                        <Text style={styles.approved}>Ova deponija nije uklonjena!</Text>
+                    </View>
+                    {userInfo.user.role[0].roleName === 'editor'
+                    ?
+                    <AppButton
+                    title={"Kliknite ukoliko ste uklonili deponiju"} onPress={() =>
+                        {
+                            updateReport(report.description, report.title, report.address, true)}
+                        }/> 
+                    :
+                    null} 
+                </View> 
+                }
+
             </View>
+               
+
         </View>
     );
 }
@@ -73,12 +112,31 @@ const styles = StyleSheet.create({
         color: '#045346'
     },
     address: {
-        fontSize:12,
-        color: 'blue'
+        fontSize:14,
+        color: '#2dcafe',
+        marginVertical: 7
     },
     opis: {
-        fontSize:18,
+        fontSize:16,
         marginBottom: 7
+    },
+    ikonica: {
+        width: 20,
+        height:20,
+        marginRight: 5,
+        marginVertical:7
+    },
+    komentar: {
+        fontSize:16,
+        marginBottom: 7,
+        color: 'gray'
+    },
+    wrap: {
+        flexDirection: 'row'
+    },
+    approved: {
+        color: '#c0c0c0',
+        marginVertical:7
     }
 })
 

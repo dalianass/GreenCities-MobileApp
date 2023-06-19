@@ -1,10 +1,11 @@
 import * as React from 'react';
 import MapView, { Circle } from 'react-native-maps';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import MapMarker from "./MapMarker";
 import axios from 'axios';
 import { myUrl } from '../helpers/urlHelper';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Map({navigation}) {
     const [pin, setPin] = useState(
@@ -19,8 +20,17 @@ export default function Map({navigation}) {
   },
   []);
 
+  const {userToken} = useContext(AuthContext);
+
+  const axiosInstance = axios.create({
+      baseURL: myUrl,
+      headers: {
+        Authorization: 'Bearer ' + userToken
+      },
+    });
+
   const callApi = () =>{
-      axios.get(myUrl +  '/reports')
+    axiosInstance.get('/reports')
       .then(function (response) {
           let reports = response.data;
           setItems(reports);
